@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "transactions": 39,
+  "opening_balance_cents": 1850000,
+  "computed_closing_cents": 752444,
+  "bank_closing_cents": 752444,
+  "overlap_rows_with_different_balances": [
+    {
+      "transaction_id": 22,
+      "date": "2026-09-17",
+      "description": "POS 4411 SHELL",
+      "balances_cents": {
+        "export_a.csv": 753257,
+        "export_b.csv": 747827
+      },
+      "spread_cents": 5430
+    },
+    {
+      "transaction_id": 24,
+      "date": "2026-09-18",
+      "description": "FEE INTL WIRE",
+      "balances_cents": {
+        "export_a.csv": 888557,
+        "export_b.csv": 883127
+      },
+      "spread_cents": 5430
+    },
+    {
+      "transaction_id": 23,
+      "date": "2026-09-18",
+      "description": "STRIPE PAYOUT",
+      "balances_cents": {
+        "export_a.csv": 892057,
+        "export_b.csv": 886627
+      },
+      "spread_cents": 5430
+    },
+    {
+      "transaction_id": 25,
+      "date": "2026-09-19",
+      "description": "GUSTO PAYROLL 0919",
+      "balances_cents": {
+        "export_a.csv": 250557,
+        "export_b.csv": 245127
+      },
+      "spread_cents": 5430
+    },
+    {
+      "transaction_id": 26,
+      "date": "2026-09-19",
+      "description": "FAIRBANKS HOLDINGS LLC",
+      "balances_cents": {
+        "export_a.csv": 209280,
+        "export_b.csv": 203850
+      },
+      "spread_cents": 5430
+    },
+    {
+      "transaction_id": 27,
+      "date": "2026-09-20",
+      "description": "SHOPIFY PAYOUT 5548230",
+      "balances_cents": {
+        "export_a.csv": 450345,
+        "export_b.csv": 444915
+      },
+      "spread_cents": 5430
+    }
+  ],
+  "rows_in_overlap_window_seen_in_only_one_file": [
+    {
+      "transaction_id": 28,
+      "date": "2026-09-17",
+      "description": "DHL EXPRESS 22188",
+      "amount_cents": -5430,
+      "only_in": "export_b.csv"
+    }
+  ]
+}
