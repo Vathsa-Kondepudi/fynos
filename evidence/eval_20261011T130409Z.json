@@ -1,0 +1,1148 @@
+{
+  "model": "openai/gpt-oss-20b",
+  "prompt_version": "v2",
+  "confidence_threshold": 0.7,
+  "runs": [
+    {
+      "no_memory": {
+        "reconcile": {
+          "ok": true,
+          "transactions": 39,
+          "opening_balance_cents": 1850000,
+          "computed_closing_cents": 752444,
+          "bank_closing_cents": 752444,
+          "overlap_rows_with_different_balances": [
+            {
+              "transaction_id": 22,
+              "date": "2026-09-17",
+              "description": "POS 4411 SHELL",
+              "balances_cents": {
+                "export_a.csv": 753257,
+                "export_b.csv": 747827
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 24,
+              "date": "2026-09-18",
+              "description": "FEE INTL WIRE",
+              "balances_cents": {
+                "export_a.csv": 888557,
+                "export_b.csv": 883127
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 23,
+              "date": "2026-09-18",
+              "description": "STRIPE PAYOUT",
+              "balances_cents": {
+                "export_a.csv": 892057,
+                "export_b.csv": 886627
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 25,
+              "date": "2026-09-19",
+              "description": "GUSTO PAYROLL 0919",
+              "balances_cents": {
+                "export_a.csv": 250557,
+                "export_b.csv": 245127
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 26,
+              "date": "2026-09-19",
+              "description": "FAIRBANKS HOLDINGS LLC",
+              "balances_cents": {
+                "export_a.csv": 209280,
+                "export_b.csv": 203850
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 27,
+              "date": "2026-09-20",
+              "description": "SHOPIFY PAYOUT 5548230",
+              "balances_cents": {
+                "export_a.csv": 450345,
+                "export_b.csv": 444915
+              },
+              "spread_cents": 5430
+            }
+          ],
+          "rows_in_overlap_window_seen_in_only_one_file": [
+            {
+              "transaction_id": 28,
+              "date": "2026-09-17",
+              "description": "DHL EXPRESS 22188",
+              "amount_cents": -5430,
+              "only_in": "export_b.csv"
+            }
+          ]
+        },
+        "A": {
+          "n": 27,
+          "accuracy": 0.9259259259259259,
+          "flagged_for_review": 2,
+          "accuracy_when_not_flagged": 0.92,
+          "wrong_and_not_flagged": 2,
+          "rows": [
+            {
+              "file": "A",
+              "row": 1,
+              "description": "SHOPIFY PAYOUT 5523019",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a payout from Shopify, which is a sales channel payment to the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 2,
+              "description": "FAIRBANKS HOLDINGS LLC",
+              "expected": "rent",
+              "predicted": "owner",
+              "source": "llm",
+              "confidence": 0.8,
+              "reason": "The description indicates a bank holding company, likely a transfer to a savings account, which is classified as owner.",
+              "correct": false,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 3,
+              "description": "PP*GREENBEAN TRADERS",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"PP*GREENBEAN TRADERS\" indicates a purchase from a coffee bean supplier, which is a typical inventory expense for the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 4,
+              "description": "GOOGLE *ADS8812",
+              "expected": "advertising",
+              "predicted": "advertising",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "Payment to Google Ads for advertising services",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 5,
+              "description": "DHL EXPRESS 22091",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a DHL Express shipment, which is a courier service used for shipping goods, so it falls under the shipping category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 6,
+              "description": "MONTHLY ACCOUNT FEE",
+              "expected": "bank_fees",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a monthly account fee, which is a typical bank charge.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 7,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Stripe payout, which represents money paid to the business from its sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 8,
+              "description": "GUSTO PAYROLL 0905",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is from Gusto, a payroll service, indicating it is a payroll payment.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 9,
+              "description": "AMZN MKTP US*2K91",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.6,
+              "reason": "Amazon marketplace purchase likely for business supplies (e.g., coffee beans, packaging). No clear indication of personal use, but ambiguity remains.",
+              "correct": true,
+              "flagged": true
+            },
+            {
+              "file": "A",
+              "row": 10,
+              "description": "TRANSFER TO SAVINGS 4471",
+              "expected": "owner",
+              "predicted": "owner",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a transfer to a savings account, which is a movement of funds between the business and the owner, so it falls under the 'owner' category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 11,
+              "description": "SHOPIFY PAYOUT 5531877",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The description indicates a Shopify payout, which is revenue received by the business from its sales channel.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 12,
+              "description": "UPS 1Z88A0",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a UPS shipment (tracking number 1Z88A0), which is a typical shipping expense for the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 13,
+              "description": "J MORALES",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.6,
+              "reason": "The transaction is a debit to an individual named J\u202fMORALES, which typically indicates a contractor or employee payment rather than a vendor or owner expense. No other context suggests a different category, so payroll is the most likely classification, but uncertainty remains.",
+              "correct": true,
+              "flagged": true
+            },
+            {
+              "file": "A",
+              "row": 14,
+              "description": "META ADS FB.ME/ADS",
+              "expected": "advertising",
+              "predicted": "advertising",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction description indicates a payment to Meta Ads (Facebook advertising), which falls under advertising expenses.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 15,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Stripe payout, which represents money paid to the business from its sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 16,
+              "description": "IRS USATAXPYMT",
+              "expected": "tax",
+              "predicted": "tax",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "IRS tax payment",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 17,
+              "description": "SHOPIFY PAYOUT 5540112",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Shopify payout, indicating money received from sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 18,
+              "description": "PP*GREENBEAN TRADERS",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"PP*GREENBEAN TRADERS\" indicates a purchase from a coffee supplier, which is a typical inventory expense for the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 19,
+              "description": "NOTION LABS",
+              "expected": "software",
+              "predicted": "software",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"NOTION LABS\" indicates a subscription to Notion, a software service, so the transaction belongs to the software account category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 20,
+              "description": "USPS PO 0441",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a USPS postage order (PO 0441), which is a shipping expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 21,
+              "description": "USPS PO 0441",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a USPS transaction, which is typically a shipping or postage expense. The amount is a small negative charge consistent with a postage purchase, so it fits the shipping category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 22,
+              "description": "POS 4411 SHELL",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a fuel purchase at Shell, which is a typical expense for delivery van or courier fuel, fitting the shipping category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 23,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Stripe payout, which represents money received by the business from its sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 24,
+              "description": "FEE INTL WIRE",
+              "expected": "bank_fees",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a fee for an international wire transfer, which is a bank charge.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 25,
+              "description": "GUSTO PAYROLL 0919",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is from Gusto, a payroll service, indicating payment of wages or contractor fees.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 26,
+              "description": "FAIRBANKS HOLDINGS LLC",
+              "expected": "rent",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.8,
+              "reason": "The transaction is from FAIRBANKS HOLDINGS LLC, a bank holding company, which typically indicates a bank fee or related charge rather than a business expense or income.",
+              "correct": false,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 27,
+              "description": "SHOPIFY PAYOUT 5548230",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a Shopify payout, which is money received by the business from its sales channel.",
+              "correct": true,
+              "flagged": false
+            }
+          ]
+        },
+        "B_only": {
+          "n": 12,
+          "accuracy": 0.9166666666666666,
+          "flagged_for_review": 2,
+          "accuracy_when_not_flagged": 0.9,
+          "wrong_and_not_flagged": 1,
+          "rows": [
+            {
+              "file": "B",
+              "row": 5,
+              "description": "DHL EXPRESS 22188",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a DHL Express shipment fee, which is a shipping expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 12,
+              "description": "KLAVIYO INC",
+              "expected": "software",
+              "predicted": "software",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "KLAVIYO INC is a known software subscription service for marketing automation, matching the software category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 13,
+              "description": "AMZN MKTP US*7Q22",
+              "expected": "owner",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.8,
+              "reason": "The transaction is an Amazon Marketplace purchase, which for a small coffee business is most likely a purchase of inventory items such as coffee beans, packaging, or other supplies.",
+              "correct": false,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 14,
+              "description": "J MORALES",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.6,
+              "reason": "The transaction is a debit to an individual named J MORALES, which is typical for contractor or employee payments rather than a vendor or owner transfer.",
+              "correct": true,
+              "flagged": true
+            },
+            {
+              "file": "B",
+              "row": 15,
+              "description": "DHL EXPRESS 22417",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a DHL Express shipment, which is a courier service used for shipping goods. This transaction represents a shipping expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 16,
+              "description": "SHOPIFY PAYOUT 5555901",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a payout from Shopify, which is a sales channel payment to the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 17,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Stripe payout, which represents money paid to the business from its sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 18,
+              "description": "TRANSFER FROM SAVINGS 4471",
+              "expected": "owner",
+              "predicted": "owner",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a transfer from a savings account, which is a movement of funds between the business and the owner\u2019s personal accounts, so it falls under the 'owner' category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 19,
+              "description": "AMZN MKTP US*9B03",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.65,
+              "reason": "The transaction is an Amazon Marketplace purchase, which is commonly used by the business to buy supplies such as coffee beans or packaging. No other context indicates a personal expense, so it is classified as inventory with moderate confidence.",
+              "correct": true,
+              "flagged": true
+            },
+            {
+              "file": "B",
+              "row": 20,
+              "description": "PP*GREENBEAN TRADERS",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"PP*GREENBEAN TRADERS\" indicates a purchase from a coffee supplier, which is a typical inventory expense for the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 21,
+              "description": "MONTHLY ACCOUNT FEE",
+              "expected": "bank_fees",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a monthly account fee, which is a typical bank charge.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 22,
+              "description": "SHOPIFY PAYOUT 5561004",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a payout from Shopify, indicating money received by the business from sales channels.",
+              "correct": true,
+              "flagged": false
+            }
+          ]
+        }
+      },
+      "with_memory": {
+        "reconcile": {
+          "ok": true,
+          "transactions": 39,
+          "opening_balance_cents": 1850000,
+          "computed_closing_cents": 752444,
+          "bank_closing_cents": 752444,
+          "overlap_rows_with_different_balances": [
+            {
+              "transaction_id": 22,
+              "date": "2026-09-17",
+              "description": "POS 4411 SHELL",
+              "balances_cents": {
+                "export_a.csv": 753257,
+                "export_b.csv": 747827
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 24,
+              "date": "2026-09-18",
+              "description": "FEE INTL WIRE",
+              "balances_cents": {
+                "export_a.csv": 888557,
+                "export_b.csv": 883127
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 23,
+              "date": "2026-09-18",
+              "description": "STRIPE PAYOUT",
+              "balances_cents": {
+                "export_a.csv": 892057,
+                "export_b.csv": 886627
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 25,
+              "date": "2026-09-19",
+              "description": "GUSTO PAYROLL 0919",
+              "balances_cents": {
+                "export_a.csv": 250557,
+                "export_b.csv": 245127
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 26,
+              "date": "2026-09-19",
+              "description": "FAIRBANKS HOLDINGS LLC",
+              "balances_cents": {
+                "export_a.csv": 209280,
+                "export_b.csv": 203850
+              },
+              "spread_cents": 5430
+            },
+            {
+              "transaction_id": 27,
+              "date": "2026-09-20",
+              "description": "SHOPIFY PAYOUT 5548230",
+              "balances_cents": {
+                "export_a.csv": 450345,
+                "export_b.csv": 444915
+              },
+              "spread_cents": 5430
+            }
+          ],
+          "rows_in_overlap_window_seen_in_only_one_file": [
+            {
+              "transaction_id": 28,
+              "date": "2026-09-17",
+              "description": "DHL EXPRESS 22188",
+              "amount_cents": -5430,
+              "only_in": "export_b.csv"
+            }
+          ]
+        },
+        "A_before_corrections": {
+          "n": 27,
+          "accuracy": 0.9259259259259259,
+          "flagged_for_review": 3,
+          "accuracy_when_not_flagged": 0.9583333333333334,
+          "wrong_and_not_flagged": 1,
+          "rows": [
+            {
+              "file": "A",
+              "row": 1,
+              "description": "SHOPIFY PAYOUT 5523019",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a Shopify payout, which is money received by the business from its sales channel, fitting the sales_payout category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 2,
+              "description": "FAIRBANKS HOLDINGS LLC",
+              "expected": "rent",
+              "predicted": "owner",
+              "source": "llm",
+              "confidence": 0.8,
+              "reason": "FAIRBANKS HOLDINGS LLC is a bank holding company, indicating a transfer to or from a savings account rather than an expense or income. The large negative amount suggests a withdrawal or transfer, so it is classified as an owner transaction.",
+              "correct": false,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 3,
+              "description": "PP*GREENBEAN TRADERS",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"PP*GREENBEAN TRADERS\" indicates a purchase from a coffee supplier, which is a typical inventory expense for the business.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 4,
+              "description": "GOOGLE *ADS8812",
+              "expected": "advertising",
+              "predicted": "advertising",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a payment to Google Ads, which is a paid advertising service.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 5,
+              "description": "DHL EXPRESS 22091",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a DHL Express shipment, which is a courier service charge for shipping goods.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 6,
+              "description": "MONTHLY ACCOUNT FEE",
+              "expected": "bank_fees",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a monthly account fee, which is a typical bank charge.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 7,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "Stripe payout to the business, representing revenue received from sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 8,
+              "description": "GUSTO PAYROLL 0905",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a payroll payment processed through Gusto, a known payroll service, indicating it is a payroll expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 9,
+              "description": "AMZN MKTP US*2K91",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.65,
+              "reason": "Amazon Marketplace purchase likely for inventory supplies such as coffee beans or packaging.",
+              "correct": true,
+              "flagged": true
+            },
+            {
+              "file": "A",
+              "row": 10,
+              "description": "TRANSFER TO SAVINGS 4471",
+              "expected": "owner",
+              "predicted": "owner",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a transfer to a savings account, which is a typical owner transaction moving funds out of the business account.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 11,
+              "description": "SHOPIFY PAYOUT 5531877",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a Shopify payout, which represents money paid to the business by the sales channel.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 12,
+              "description": "UPS 1Z88A0",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a UPS shipment (UPS 1Z88A0), which is a typical shipping cost for delivering goods or packages.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 13,
+              "description": "J MORALES",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.6,
+              "reason": "The description is a personal name (J\u202fMORALES) with no other identifying information, which typically indicates a contractor or employee payment.  Without a known pattern or additional context, this is the most likely classification, but the ambiguity keeps confidence below 0.7.",
+              "correct": true,
+              "flagged": true
+            },
+            {
+              "file": "A",
+              "row": 14,
+              "description": "META ADS FB.ME/ADS",
+              "expected": "advertising",
+              "predicted": "advertising",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a payment to Meta Ads (Facebook Ads), which is a paid advertising expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 15,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Stripe payout, which represents money paid to the business from its sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 16,
+              "description": "IRS USATAXPYMT",
+              "expected": "tax",
+              "predicted": "tax",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "IRS tax payment",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 17,
+              "description": "SHOPIFY PAYOUT 5540112",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Shopify payout, indicating money received from sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 18,
+              "description": "PP*GREENBEAN TRADERS",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"PP*GREENBEAN TRADERS\" matches a known coffee supplier, indicating a purchase of inventory (coffee beans).",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 19,
+              "description": "NOTION LABS",
+              "expected": "software",
+              "predicted": "software",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description \"NOTION LABS\" indicates a subscription to Notion, a software service, so it falls under the software account category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 20,
+              "description": "USPS PO 0441",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.92,
+              "reason": "The description indicates a USPS transaction, which is typically a shipping or postage expense. The amount is a small outflow consistent with a shipping label or postage fee.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 21,
+              "description": "USPS PO 0441",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a USPS postage purchase, which is a shipping expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 22,
+              "description": "POS 4411 SHELL",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a fuel purchase at Shell, which is a typical expense for delivery van or courier fuel, fitting the shipping category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 23,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.99,
+              "reason": "The transaction is a Stripe payout, which represents money paid to the business from sales channels.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 24,
+              "description": "FEE INTL WIRE",
+              "expected": "bank_fees",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a fee for an international wire transfer, which is a bank charge.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 25,
+              "description": "GUSTO PAYROLL 0919",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is from Gusto, a payroll service, indicating payment of wages or contractor fees.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "A",
+              "row": 26,
+              "description": "FAIRBANKS HOLDINGS LLC",
+              "expected": "rent",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.6,
+              "reason": "The description references FAIRBANKS HOLDINGS LLC, a bank holding company, suggesting a bank\u2011related charge such as a fee or transfer. No other pattern matches, so it is classified as a bank fee with moderate confidence.",
+              "correct": false,
+              "flagged": true
+            },
+            {
+              "file": "A",
+              "row": 27,
+              "description": "SHOPIFY PAYOUT 5548230",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a Shopify payout, which is revenue received by the business from its sales channel.",
+              "correct": true,
+              "flagged": false
+            }
+          ]
+        },
+        "corrections_applied": 6,
+        "rules_created": [
+          "FAIRBANKS",
+          "GREENBEAN",
+          "J MORALES",
+          "SHELL"
+        ],
+        "B_only": {
+          "n": 12,
+          "accuracy": 0.8333333333333334,
+          "flagged_for_review": 1,
+          "accuracy_when_not_flagged": 0.9090909090909091,
+          "wrong_and_not_flagged": 1,
+          "rows": [
+            {
+              "file": "B",
+              "row": 5,
+              "description": "DHL EXPRESS 22188",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a DHL Express shipment, which is a courier service used for delivering goods. This matches the shipping category for courier and delivery van costs.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 12,
+              "description": "KLAVIYO INC",
+              "expected": "software",
+              "predicted": null,
+              "source": null,
+              "confidence": null,
+              "reason": null,
+              "correct": false,
+              "flagged": true
+            },
+            {
+              "file": "B",
+              "row": 13,
+              "description": "AMZN MKTP US*7Q22",
+              "expected": "owner",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.9,
+              "reason": "The transaction is an Amazon Marketplace purchase (AMZN MKTP US*7Q22), which matches the known pattern of Amazon purchases being classified as inventory (e.g., AMZN MKTP US*2K91).",
+              "correct": false,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 14,
+              "description": "J MORALES",
+              "expected": "payroll",
+              "predicted": "payroll",
+              "source": "rule",
+              "confidence": 1.0,
+              "reason": "Matched rule: J MORALES \u2192 payroll",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 15,
+              "description": "DHL EXPRESS 22417",
+              "expected": "shipping",
+              "predicted": "shipping",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is from DHL EXPRESS, a courier service used for shipping deliveries, matching the known shipping pattern.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 16,
+              "description": "SHOPIFY PAYOUT 5555901",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a Shopify payout, which is money received by the business from a sales channel.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 17,
+              "description": "STRIPE PAYOUT",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a Stripe payout, which represents money received from sales channels, so it belongs in the sales_payout category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 18,
+              "description": "TRANSFER FROM SAVINGS 4471",
+              "expected": "owner",
+              "predicted": "owner",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description indicates a transfer from a savings account, which is a movement of funds between the business and the owner, so it falls under the 'owner' category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 19,
+              "description": "AMZN MKTP US*9B03",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "llm",
+              "confidence": 0.8,
+              "reason": "The transaction is an Amazon Marketplace purchase (AMZN MKTP US*9B03), which aligns with the known pattern of using Amazon for inventory items such as coffee bags, labels, or packaging. The amount is consistent with a small inventory purchase rather than a personal expense.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 20,
+              "description": "PP*GREENBEAN TRADERS",
+              "expected": "inventory",
+              "predicted": "inventory",
+              "source": "rule",
+              "confidence": 1.0,
+              "reason": "Matched rule: GREENBEAN \u2192 inventory",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 21,
+              "description": "MONTHLY ACCOUNT FEE",
+              "expected": "bank_fees",
+              "predicted": "bank_fees",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The description 'MONTHLY ACCOUNT FEE' indicates a recurring bank charge for maintaining the business account, which falls under the bank_fees category.",
+              "correct": true,
+              "flagged": false
+            },
+            {
+              "file": "B",
+              "row": 22,
+              "description": "SHOPIFY PAYOUT 5561004",
+              "expected": "sales_payout",
+              "predicted": "sales_payout",
+              "source": "llm",
+              "confidence": 0.95,
+              "reason": "The transaction is a Shopify payout, which represents money paid to the business by a sales channel.",
+              "correct": true,
+              "flagged": false
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
