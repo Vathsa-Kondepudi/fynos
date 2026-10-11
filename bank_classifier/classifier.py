@@ -23,7 +23,7 @@ from .models import (
 CONFIDENCE_THRESHOLD = 0.7
 
 # Prompt version for audit trail
-PROMPT_VERSION = "v1"
+PROMPT_VERSION = "v2"
 
 
 class ClassificationResult(BaseModel):
@@ -71,6 +71,25 @@ def format_rules_for_prompt(rules: list[DurableRule]) -> str:
         note = f" ({rule.note})" if rule.note else ""
         lines.append(f"- {rule.counterparty_pattern} → {rule.account}{note}")
     
+    return "\n".join(lines)
+
+
+def get_human_corrections(session: Session, business_id: int, limit: int = 30) -> list[Classification]:
+    """Most recent accountant corrections for this business, newest first."""
+    return session.query(Classification).join(Transaction).filter(
+        Transaction.business_id == business_id,
+        Classification.source == ClassificationSource.HUMAN.value,
+    ).order_by(Classification.id.desc()).limit(limit).all()
+
+
+def format_corrections_for_prompt(corrections: list[Classification]) -> str:
+    if not corrections:
+        return "Past corrections by the accountant: none yet."
+    lines = ["Past corrections by the accountant (examples, not rules; one-off exceptions apply only to that transaction):"]
+    for c in corrections:
+        t = c.transaction
+        note = f" - note: {c.reason}" if c.reason else ""
+        lines.append(f"- {t.description} ({t.amount_cents / 100:.2f}) -> {c.account}{note}")
     return "\n".join(lines)
 
 
@@ -165,9 +184,10 @@ def classify_by_llm(
     if llm is None:
         llm = get_llm()
     
-    # Get rules for context
     rules = get_active_rules(session, business_id)
-    rules_text = format_rules_for_prompt(rules)
+    rules_text = format_rules_for_prompt(rules) + "\n\n" + format_corrections_for_prompt(
+        get_human_corrections(session, business_id)
+    )
     
     # Build prompt
     prompt = build_classification_prompt()

@@ -120,7 +120,7 @@ class Transaction(Base):
     business: Mapped["Business"] = relationship(back_populates="transactions")
     raw_rows: Mapped[list["RawRow"]] = relationship(back_populates="transaction")
     classifications: Mapped[list["Classification"]] = relationship(
-        back_populates="transaction", order_by="Classification.created_at"
+        back_populates="transaction", order_by="Classification.id"
     )
 
     __table_args__ = (

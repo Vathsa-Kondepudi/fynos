@@ -307,7 +307,7 @@ def export(ctx, output):
                     "date": txn.date.isoformat(),
                     "description": txn.description,
                     "amount_cents": txn.amount_cents,
-                    "current_account": txn.current_account.value if txn.current_account else None,
+                    "current_account": txn.current_account,
                     "classification_source": txn.current_classification.source if txn.current_classification else None,
                     "confidence": txn.current_classification.confidence if txn.current_classification else None,
                 }
@@ -320,6 +320,19 @@ def export(ctx, output):
             click.echo(f"Exported to {output}")
         else:
             click.echo(json.dumps(data, indent=2))
+
+
+@cli.command("reconcile")
+@click.pass_context
+def reconcile_cmd(ctx):
+    """Check merged transactions against the bank's balances."""
+    from .ingestion import reconcile
+    with get_session() as session:
+        business = get_or_create_business(session, ctx.obj["business_name"])
+        result = reconcile(session, business.id)
+        click.echo(json.dumps(result, indent=2))
+        if not result["ok"]:
+            raise SystemExit(1)
 
 
 @cli.command()

@@ -330,6 +330,62 @@ def get_latest_balance_from_files(session: Session, business_id: int) -> Optiona
     return last_row.balance_cents
 
 
+def reconcile(session: Session, business_id: int) -> dict:
+    """
+    Check the merged transactions against the bank's own numbers.
+
+    opening balance (from the earliest file) + sum of all transaction amounts
+    must equal the closing balance of the file that ends latest. Also lists
+    rows that appear in several files with different balances, which is how a
+    row posted late into one export shows up.
+    """
+    files = session.query(SourceFile).filter(SourceFile.business_id == business_id).all()
+    if not files:
+        return {"ok": True, "transactions": 0}
+
+    def rows(f):
+        return sorted(f.raw_rows, key=lambda r: r.row_number)
+
+    earliest = min(files, key=lambda f: (rows(f)[0].date, f.id))
+    latest = max(files, key=lambda f: (rows(f)[-1].date, f.id))
+    first = rows(earliest)[0]
+    opening = first.balance_cents - first.amount_cents
+    bank_closing = rows(latest)[-1].balance_cents
+
+    txns = get_merged_transactions(session, business_id)
+    computed_closing = opening + sum(t.amount_cents for t in txns)
+
+    balance_disagreements = []
+    for t in txns:
+        balances = {r.source_file.filename: r.balance_cents for r in t.raw_rows}
+        if len(set(balances.values())) > 1:
+            balance_disagreements.append({
+                "transaction_id": t.id,
+                "date": t.date.isoformat(),
+                "description": t.description,
+                "balances_cents": balances,
+                "spread_cents": max(balances.values()) - min(balances.values()),
+            })
+
+    single_source = [
+        {"transaction_id": t.id, "date": t.date.isoformat(), "description": t.description,
+         "amount_cents": t.amount_cents, "only_in": t.raw_rows[0].source_file.filename}
+        for t in txns
+        if len(t.raw_rows) == 1 and earliest.id != latest.id
+        and rows(latest)[0].date <= t.date <= rows(earliest)[-1].date
+    ]
+
+    return {
+        "ok": computed_closing == bank_closing,
+        "transactions": len(txns),
+        "opening_balance_cents": opening,
+        "computed_closing_cents": computed_closing,
+        "bank_closing_cents": bank_closing,
+        "overlap_rows_with_different_balances": balance_disagreements,
+        "rows_in_overlap_window_seen_in_only_one_file": single_source,
+    }
+
+
 def get_transaction_count(session: Session, business_id: int) -> int:
     """Get the total number of transactions for a business."""
     return session.query(func.count(Transaction.id)).filter(
