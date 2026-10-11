@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bank-classifier"
+version = "0.1.0"
+description = "Bank Statement Classifier with Memory using LLM"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "sqlalchemy>=2.0.0",
+    "langchain>=0.2.0",
+    "langchain-groq>=0.1.0",
+    "langgraph>=0.2.0",
+    "click>=8.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+bank-classifier = "bank_classifier.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["bank_classifier*"]
+
+[tool.pytest.ini_options]
+testpaths = ["bank_classifier/tests"]
+python_files = ["test_*.py"]
